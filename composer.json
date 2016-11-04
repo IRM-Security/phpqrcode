@@ -1,0 +1,19 @@
+{
+  	"name": "Ruslan03492/phpqrcode",
+	"type": "library",
+	"description": "A PHP class to generate QR Code",
+	"keywords": ["php", "qrcode"],
+	"homepage": "https://github.com/Ruslan03492/phpqrcode.git",
+	"license": ["LGPL"],
+	"authors": [
+		{
+			"name": "Ruslan Telyak"
+		}
+	],
+	"require": {
+		"php": ">=4.3.10"
+	},
+	"autoload": {
+		"files": ["qrlib.php"]
+	}
+}
