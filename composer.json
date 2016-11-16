@@ -22,7 +22,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Ruslan03492\\QrCode\\": "src/"
+      "Ruslan03492\\phpqrcode\\": "src/"
     }
   }
 }
