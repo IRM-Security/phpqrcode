@@ -108,7 +108,7 @@ class QrCode {
   /**
    * @var int
    */
-  protected $padding = 1;
+  protected $padding = 0;
 
   /**
    * @var string
@@ -441,21 +441,6 @@ class QrCode {
   }
 
   /**
-   * Get Data uri.
-   */
-  public function getDataUri() {
-    $data = $this->encode();
-    $contents = '';
-    switch ($this->extensions) {
-      case 'png' :
-      case 'jpeg' :
-        $contents = QrImage::getImage($data, $this);
-        break;
-    }
-    return 'data:image/' . $this->extensions . ';base64,'.base64_encode($contents);
-  }
-
-  /**
    * Get Content.
    */
   public function get() {
@@ -466,8 +451,19 @@ class QrCode {
       case 'jpeg' :
         $contents = QrImage::getImage($data, $this);
         break;
+      case 'svg' :
+      case 'eps' :
+        $contents = QrVect::getVect($data, $this);
+        break;
     }
-    return 'data:image/' . $this->extensions . ';base64,'.base64_encode($contents);
+    return $contents;
+  }
+
+  /**
+   * Get Data uri.
+   */
+  public function getDataUri() {
+    return 'data:image/' . $this->extensions . ';base64,'.base64_encode($this->get());
   }
 
 }

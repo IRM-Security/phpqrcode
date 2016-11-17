@@ -2,18 +2,23 @@
 
 namespace Ruslan03492\phpqrcode\Images;
 
+use Ruslan03492\phpqrcode\QrCode;
+
 class QrVect {
 
-  //----------------------------------------------------------------------
-  public static function eps($frame, $pixelPerPoint = 4, $outerFrame = 4, $back_color = 0xFFFFFF, $fore_color = 0x000000, $cmyk = FALSE) {
-    $vect = self::vectEPS($frame, $pixelPerPoint, $outerFrame, $back_color, $fore_color, $cmyk);
-    header("Content-Type: application/postscript");
-    print $vect;
+  public static function getVect($data, QrCode $qr_code) {
+    $call_fun = 'vect' . $qr_code->getExtensions();
+    return self::$call_fun(
+      $data,
+      $qr_code->getSize(),
+      $qr_code->getPadding(),
+      $qr_code->getColorBackground(),
+      $qr_code->getColorForeground()
+    );
   }
 
-
   //----------------------------------------------------------------------
-  private static function vectEPS($frame, $pixelPerPoint = 4, $outerFrame = 4, $back_color = 0xFFFFFF, $fore_color = 0x000000, $cmyk = FALSE) {
+  private function vectEPS($frame, $pixelPerPoint = 4, $outerFrame = 4, $back_color = 0xFFFFFF, $fore_color = 0x000000, $cmyk = FALSE) {
     $h = count($frame);
     $w = strlen($frame[0]);
 
@@ -96,15 +101,7 @@ class QrVect {
   }
 
   //----------------------------------------------------------------------
-  public static function svg($frame, $size = 200, $outerFrame = 4, $back_color = 0xFFFFFF, $fore_color = 0x000000) {
-    $vect = self::vectSVG($frame, $size, $outerFrame, $back_color, $fore_color);
-    header("Content-Type: image/svg+xml");
-    echo $vect;
-  }
-
-
-  //----------------------------------------------------------------------
-  private static function vectSVG($frame, $size = 200, $outerFrame = 4, $back_color = 0xFFFFFF, $fore_color = 0x000000) {
+  private function vectSVG($frame, $size = 200, $outerFrame = 4, $back_color = 0xFFFFFF, $fore_color = 0x000000) {
     $h = count($frame);
     $w = strlen($frame[0]);
     $margin = $outerFrame;
@@ -112,16 +109,16 @@ class QrVect {
     $fore_color = str_pad(dechex($fore_color), 6, "0", STR_PAD_LEFT);
     $x_y_size = $size / ($h + 2 * $outerFrame);
     $rect = '<rect x="0" y="0" width="' . $size . '" height="' . $size . '" style="fill:#' . $back_color . ';shape-rendering:crispEdges;"/>';
-//            if ($border) {
-    $border = self::borderCords(0);
-    $x_y_size_border = $size / 52 + 12;
-    foreach ($border['cords'] as $b) {
-      $px = ($b['x'] / 2 * $x_y_size_border);
-      $py = ($b['y'] / 2 * $x_y_size_border);
-      $rect .= '<rect x="' . $px . '" y="' . $py . '" width="' . $x_y_size_border . '" height="' . $x_y_size_border . '" style="fill:#' . $fore_color . ';shape-rendering:crispEdges;"/>';
-    }
-    $margin = ($x_y_size_border * 3) + 4;
-//            }
+////            if ($border) {
+//    $border = self::borderCords(0);
+//    $x_y_size_border = $size / 52 + ($x_y_size * 2);
+//    foreach ($border['cords'] as $b) {
+//      $px = ($b['x'] / 2 * $x_y_size_border);
+//      $py = ($b['y'] / 2 * $x_y_size_border);
+//      $rect .= '<rect x="' . $px . '" y="' . $py . '" width="' . $x_y_size_border . '" height="' . $x_y_size_border . '" style="fill:#' . $fore_color . ';shape-rendering:crispEdges;"/>';
+//    }
+//    $margin = ($x_y_size_border * 3) + 4;
+////            }
 
     for ($i = 0; $i < $h; $i++) {
       for ($j = 0; $j < $w; $j++) {
