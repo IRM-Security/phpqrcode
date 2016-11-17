@@ -2,6 +2,9 @@
 
 namespace Ruslan03492\phpqrcode;
 use Exception;
+use Ruslan03492\phpqrcode\Inputs\QrInput;
+use Ruslan03492\phpqrcode\Rs\QrRsBlock;
+use Ruslan03492\phpqrcode\Rs\QrRs;
 
 class QrRawCode {
   public $version;
@@ -53,7 +56,7 @@ class QrRawCode {
     $eccPos = 0;
     for ($i = 0; $i < QrSpec::rsBlockNum1($spec); $i++) {
       $ecc = array_slice($this->ecccode, $eccPos);
-      $this->rsblocks[$blockNo] = new QRrsblock($dl, array_slice($this->datacode, $dataPos), $el, $ecc, $rs);
+      $this->rsblocks[$blockNo] = new QrRsBlock($dl, array_slice($this->datacode, $dataPos), $el, $ecc, $rs);
       $this->ecccode = array_merge(array_slice($this->ecccode, 0, $eccPos), $ecc);
 
       $dataPos += $dl;

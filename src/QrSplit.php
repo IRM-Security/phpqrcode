@@ -2,6 +2,7 @@
 
 namespace Ruslan03492\phpqrcode;
 use Exception;
+use Ruslan03492\phpqrcode\Inputs\QrInput;
 
 class QrSplit {
 

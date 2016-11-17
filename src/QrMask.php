@@ -1,11 +1,6 @@
 <?php
 namespace Ruslan03492\phpqrcode;
 
-define('N1', 3);
-define('N2', 3);
-define('N3', 40);
-define('N4', 10);
-
 class QrMask {
 
   public $runLength = array();

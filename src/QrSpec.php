@@ -2,13 +2,6 @@
 
 namespace Ruslan03492\phpqrcode;
 
-define('QRSPEC_VERSION_MAX', 40);
-define('QRSPEC_WIDTH_MAX', 177);
-
-define('QRCAP_WIDTH', 0);
-define('QRCAP_WORDS', 1);
-define('QRCAP_REMINDER', 2);
-define('QRCAP_EC', 3);
 
 class QrSpec {
 
