@@ -25,7 +25,7 @@ class QrImage {
   }
 
   //----------------------------------------------------------------------
-  private function image($frame, $size = 4, $outerFrame = 4, $back_color = 0xFFFFFF, $fore_color = 0x000000, $image_border_size = 200, $image_border = FALSE, $is_rotate = FALSE) {
+  private static function image($frame, $size = 4, $outerFrame = 4, $back_color = 0xFFFFFF, $fore_color = 0x000000, $image_border_size = 200, $image_border = FALSE, $is_rotate = FALSE) {
     $h = count($frame);
     $w = strlen($frame[0]);
 

@@ -18,7 +18,7 @@ class QrVect {
   }
 
   //----------------------------------------------------------------------
-  private function vectEPS($frame, $pixelPerPoint = 4, $outerFrame = 4, $back_color = 0xFFFFFF, $fore_color = 0x000000, $cmyk = FALSE) {
+  private static function vectEPS($frame, $pixelPerPoint = 4, $outerFrame = 4, $back_color = 0xFFFFFF, $fore_color = 0x000000, $cmyk = FALSE) {
     $h = count($frame);
     $w = strlen($frame[0]);
 
@@ -101,7 +101,7 @@ class QrVect {
   }
 
   //----------------------------------------------------------------------
-  private function vectSVG($frame, $size = 200, $outerFrame = 4, $back_color = 0xFFFFFF, $fore_color = 0x000000) {
+  private static function vectSVG($frame, $size = 200, $outerFrame = 4, $back_color = 0xFFFFFF, $fore_color = 0x000000) {
     $h = count($frame);
     $w = strlen($frame[0]);
     $margin = $outerFrame;
